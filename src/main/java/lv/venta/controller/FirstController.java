@@ -77,4 +77,14 @@ public class FirstController {
 		model.addAttribute("MyProducts", allProducts);
 		return "allproducts-page";
 	}
+	
+	@GetMapping("/product/allProducts/Under")
+	public String productsUnderValue(org.springframework.ui.Model model) {
+		for(Product temp: allProducts) {
+			if(temp.getPrice() < 5 ) {
+				model.addAttribute("MyProducts", temp);
+			}
+		}
+		return "allproducts-page";
+	}
 }
