@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Product page!</title>
+</head>
+<body>
+	<p>Welcome to my first Product!</p>
+	<p th:text="${MyProduct.getID()}"></p>
+	<p th:text="${MyProduct.getName()}"></p>
+	<p th:text="${MyProduct.getDescription()}"></p>
+	<p th:text="${MyProduct.getPrice()}"></p>
+	<p th:text="${MyProduct.getQuantity()}"></p>
+	<h2>ToString!</h2>
+	<p th:text="${MyProduct.toString()}"></p>
+</body>
+</html>
