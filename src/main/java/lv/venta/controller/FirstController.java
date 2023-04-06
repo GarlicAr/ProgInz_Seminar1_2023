@@ -71,4 +71,10 @@ public class FirstController {
 		}
 	    return "error-page";
 	}
+	
+	@GetMapping("/product/allProducts")
+	public String products(org.springframework.ui.Model model) {
+		model.addAttribute("MyProducts", allProducts);
+		return "allproducts-page";
+	}
 }

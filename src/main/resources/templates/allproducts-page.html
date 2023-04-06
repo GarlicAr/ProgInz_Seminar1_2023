@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Product Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #333;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2rem;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+      }
+      .product {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #ddd;
+        padding: 1rem;
+        margin-bottom: 2rem;
+      }
+      .product img {
+        max-width: 100%;
+      }
+      .product h2 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+      }
+      .product p {
+        margin: 0;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+      }
+      .product button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+      .product button:hover {
+        background-color: #444;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Product Page</h1>
+      <nav>
+      </nav>
+    </header>
+    <main>
+   		<table th:each="Prod: ${MyProducts}">
+   			<td th:text="${prod.getID()}"></td>
+   			<td th:text="${prod.getName()}"></td>
+   			<td th:text="${prod.getDescription()}"></td>
+   			<td th:text="${prod.getPrice()}"></td>
+   		</table>
+    </main>
+  </body>
+</html>
