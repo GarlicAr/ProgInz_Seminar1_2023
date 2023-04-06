@@ -19,6 +19,7 @@
       header h1 {
         margin: 0;
         font-size: 2rem;
+        left: 50%;
       }
       main {
         display: flex;
@@ -68,10 +69,10 @@
     </header>
     <main>
    		<table th:each="Prod: ${MyProducts}">
-   			<td th:text="${prod.getID()}"></td>
-   			<td th:text="${prod.getName()}"></td>
-   			<td th:text="${prod.getDescription()}"></td>
-   			<td th:text="${prod.getPrice()}"></td>
+   			<td th:text="${Prod.getID()}"></td>
+   			<td th:text="${Prod.getName()}"></td>
+   			<td th:text="${Prod.getDescription()}"></td>
+   			<td th:text="${Prod.getPrice()}"></td>
    		</table>
     </main>
   </body>
