@@ -3,6 +3,11 @@ package lv.venta.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import lv.venta.services.ICRUDProductService;
+import lv.venta.services.IFilteringProductService;
+import lv.venta.services.impl.ProductServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +20,13 @@ import lv.venta.modules.Product;
 @Controller
 public class FirstController {
 	
+	@Autowired
+	private IFilteringProductService filterService;
+	@Autowired
+	private ICRUDProductService crudService;
+	@Autowired
+	private ProductServiceImpl prodService;
 	
-	private ArrayList<Product> allProducts = new ArrayList<>(Arrays.asList(
-			new Product("Trusiki", "Erti trusiki, lieliem dibua", (float) 2.99, 12),
-			new Product("Bikses", "Ertas bikses maziem dibua", (float)4.55,24),
-			new Product("Kurpes", "Ertas kurpes lieliem pediem", (float)12.24,4)
-			));
 	
 	@GetMapping("/hello") // Url izsaukums: localhost:8080/hello
 	public String Hello() {
@@ -48,7 +54,7 @@ public class FirstController {
 	@GetMapping("/productOne")
 	public String productByParamFunc(@RequestParam("title") String title, org.springframework.ui.Model model) {
 		if(title!=null) {
-			for(Product temp:allProducts) {
+			for(Product temp:prodService.allProducts) {
 				if(temp.getName().equals(title)) {
 					model.addAttribute("MyProduct", temp);
 					return "product-page";
@@ -62,7 +68,7 @@ public class FirstController {
 	@GetMapping("/product/{title}")
 	public String productByParam2(@PathVariable("title") String title, org.springframework.ui.Model model) {
 		if(title!=null) {
-			for(Product temp:allProducts) {
+			for(Product temp:prodService.allProducts) {
 				if(temp.getName().equals(title)) {
 					model.addAttribute("MyProduct", temp);
 					return "product-page";
@@ -74,15 +80,17 @@ public class FirstController {
 	
 	@GetMapping("/product/allProducts")
 	public String products(org.springframework.ui.Model model) {
-		model.addAttribute("MyProducts", allProducts);
+		model.addAttribute("MyProducts", prodService.allProducts);
 		return "allproducts-page";
 	}
 	
-	@GetMapping("/product/allProducts/Under")
-	public String productsUnderValue(org.springframework.ui.Model model) {
-		for(Product temp: allProducts) {
-			if(temp.getPrice() < 5 ) {
-				model.addAttribute("MyProducts", temp);
+	@GetMapping("/product/allProducts/{price}")
+	public String productsUnderValue(@PathVariable("price") int price,org.springframework.ui.Model model) {
+		ArrayList<Product> tempList = new ArrayList<>();
+		for(Product temp: prodService.allProducts) {
+			if(temp.getPrice() < price ) {
+				tempList.add(temp);
+				model.addAttribute("MyProducts", tempList);
 			}
 		}
 		return "allproducts-page";
@@ -101,13 +109,13 @@ public class FirstController {
 	@PostMapping ("/insert")
 	public String insertProductPost(Product product) {
 		Product prod = new Product(product.getName(),product.getDescription(), product.getPrice(), product.getQuantity());
-		allProducts.add(prod);
+		prodService.allProducts.add(prod);
 		return "redirect:/product/allProducts";
 	}
 	
 	@GetMapping("/update/{id}")
 	public String updateProductByID(@PathVariable("id") int id,org.springframework.ui.Model model) {
-		for(Product temp: allProducts) {
+		for(Product temp: prodService.allProducts) {
 			if(temp.getID()== id) {
 				model.addAttribute("product", temp);
 				return "update-page";
@@ -118,7 +126,7 @@ public class FirstController {
 	
 	@PostMapping("/update/{id}")
 	public String updateProductByIDpost(@PathVariable("id") int id, Product product) {
-		for(Product temp: allProducts) {
+		for(Product temp: prodService.allProducts) {
 			if(temp.getID()== id) {
 				temp.setName(product.getName());
 				temp.setPrice(product.getPrice());
@@ -133,10 +141,10 @@ public class FirstController {
 	
 	@GetMapping("/delete/{id}")
 	public String deleteFunc(@PathVariable("id") int id, org.springframework.ui.Model model) {
-		for(Product temp: allProducts) {
+		for(Product temp: prodService.allProducts) {
 			if(temp.getID()== id) {
-				allProducts.remove(temp);
-				model.addAttribute("MyProducts", allProducts);
+				prodService.allProducts.remove(temp);
+				model.addAttribute("MyProducts", prodService.allProducts);
 				return "redirect:/product/allProducts";
 			}
 		}

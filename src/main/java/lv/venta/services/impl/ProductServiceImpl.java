@@ -1,0 +1,96 @@
+package lv.venta.services.impl;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.springframework.stereotype.Service;
+
+import lv.venta.modules.Product;
+import lv.venta.services.ICRUDProductService;
+import lv.venta.services.IFilteringProductService;
+
+@Service
+public class ProductServiceImpl implements ICRUDProductService, IFilteringProductService {
+
+	public ArrayList<Product> allProducts = new ArrayList<>(
+			Arrays.asList(new Product("Trusiki", "Erti trusiki, lieliem dibua", (float) 2.99, 12),
+					new Product("Bikses", "Ertas bikses maziem dibua", (float) 4.55, 24),
+					new Product("Kurpes", "Ertas kurpes lieliem pediem", (float) 12.24, 4)));
+
+	@Override
+	public ArrayList<Product> retrieveAllProducts() {
+		// TODO Auto-generated method stub
+		return allProducts;
+	}
+
+	@Override
+	public Product retrieveOneProductByID(int id) {
+		// TODO Auto-generated method stub
+
+		for (Product temp : allProducts) {
+			if (temp.getID() == id) {
+				return temp;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Product retrieveOneProductByTitle(String name) {
+		// TODO Auto-generated method stub
+
+		for (Product temp : allProducts) {
+			if (temp.getName().equals(name)) {
+				return temp;
+			}
+		}
+		return null;
+
+	}
+
+	@Override
+	public Product insertProductByParams(String name, String description, float price, int quantity) {
+		
+		for(Product temp: allProducts) {
+			if(temp.getName().equals(name) && temp.getDescription().equals(description) && temp.getPrice() == price) {
+				temp.setQuantity(temp.getQuantity()+quantity);
+				return temp;
+			}
+		}
+
+		Product prod = new Product(name, description, price, quantity);
+		allProducts.add(prod);
+		return prod;
+	}
+
+	@Override
+	public Product updateProductByParams(int id, String name, String description, float price, int quantity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteProductByID(int id) {
+		// TODO Auto-generated method stub
+
+		for (Product temp : allProducts) {
+			if (temp.getID() == id) {
+				allProducts.remove(temp);
+			}
+		}
+
+	}
+
+	@Override
+	public ArrayList<Product> filterByPrice(float price) {
+		ArrayList<Product> tempList = new ArrayList<>();
+		for (Product temp : allProducts) {
+			if (temp.getPrice() == price) {
+				tempList.add(temp);
+				return tempList;
+			}
+		}
+		return null;
+	}
+
+}
