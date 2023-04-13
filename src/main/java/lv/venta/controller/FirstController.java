@@ -17,9 +17,9 @@ public class FirstController {
 	
 	
 	private ArrayList<Product> allProducts = new ArrayList<>(Arrays.asList(
-			new Product("Trusiki", "Erti trusiki, lieliem dibua", (float) 2.99, 1, 12),
-			new Product("Bikses", "Ertas bikses maziem dibua", (float)4.55,1,24),
-			new Product("Kurpes", "Ertas kurpes lieliem pediem", (float)12.24,1,4)
+			new Product("Trusiki", "Erti trusiki, lieliem dibua", (float) 2.99, 12),
+			new Product("Bikses", "Ertas bikses maziem dibua", (float)4.55,24),
+			new Product("Kurpes", "Ertas kurpes lieliem pediem", (float)12.24,4)
 			));
 	
 	@GetMapping("/hello") // Url izsaukums: localhost:8080/hello
@@ -40,7 +40,7 @@ public class FirstController {
 	
 	@GetMapping("/product")
 	public String product(org.springframework.ui.Model model) {
-		Product prod1=new Product("Trusiki", "Erti trusiki, lieliem dibua", (float) 2.99, 1, 12);
+		Product prod1=new Product("Trusiki", "Erti trusiki, lieliem dibua", (float) 2.99, 12);
 		model.addAttribute("MyProduct",prod1);
 		return "product-page";
 	}
@@ -87,4 +87,24 @@ public class FirstController {
 		}
 		return "allproducts-page";
 	}
+	
+	
+	
+	
+	
+	@GetMapping ("/insert") 
+	public String insertProduct(Product product) {
+		return ("insert-page");
+	}
+	
+	
+	@PostMapping ("/insert")
+	public String insertProductPost(Product product) {
+		Product prod = new Product(product.getName(),product.getDescription(), product.getPrice(), product.getQuantity());
+		allProducts.add(prod);
+		return "redirect:/product/allProducts";
+	}
+	
+	
+	
 }

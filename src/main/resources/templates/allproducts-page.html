@@ -77,6 +77,8 @@ main {
 	border: 1px solid black;
 	padding: 10px;
 	margin-right: 20px;
+	width: 300px;
+	
 }
 
 .product-title {
@@ -91,6 +93,9 @@ main {
 .product-price {
 	font-weight: bold;
 }
+.product-list {
+  white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -103,6 +108,8 @@ main {
 			<h2 th:text="${product.getName()}" class="product-title"></h2>
 			<p th:text="${product.getDescription()}" class="product-description"></p>
 			<p th:text="'Price: $' + ${product.getPrice()}" class="product-price"></p>
+			<p th:text="'Quantity:' + ${product.getQuantity()}" class="product-quantity"></p>
+			<p th:text="'ID:' + ${product.getID()}" class="product-ID"></p>
 		</div>
 
 	</main>

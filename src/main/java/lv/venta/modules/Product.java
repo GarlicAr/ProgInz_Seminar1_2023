@@ -6,14 +6,15 @@ public class Product {
 	private float price;
 	private String description;
 	private int quantity;
+	private static int idCounter=0;
 	
 	
 	
 	public int getID() {
-		return ID;
+		return this.ID;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setID() {
+		this.ID = idCounter++;
 	}
 	public String getName() {
 		return name;
@@ -24,7 +25,7 @@ public class Product {
 	public float getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 	public String getDescription() {
@@ -41,12 +42,11 @@ public class Product {
 	}
 	
 	
-	public Product(String name,String description,float price,int ID,int quantity) {
+	public Product(String name,String description,float price,int quantity) {
 		super();
 		this.name=name;
 		this.description=description;
 		this.price=price;
-		this.ID=ID;
 		this.quantity=quantity;
 		
 	}
