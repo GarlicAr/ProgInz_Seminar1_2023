@@ -105,6 +105,31 @@ public class FirstController {
 		return "redirect:/product/allProducts";
 	}
 	
+	@GetMapping("/update/{id}")
+	public String updateProductByID(@PathVariable("id") int id,org.springframework.ui.Model model) {
+		for(Product temp: allProducts) {
+			if(temp.getID()== id) {
+				model.addAttribute("product", temp);
+				return "update-page";
+			}
+		}
+		return "error-page";
+	}
+	
+	@PostMapping("/update/{id}")
+	public String updateProductByIDpost(@PathVariable("id") int id, Product product) {
+		for(Product temp: allProducts) {
+			if(temp.getID()== id) {
+				temp.setName(product.getName());
+				temp.setPrice(product.getPrice());
+				temp.setDescription(product.getDescription());
+				temp.setQuantity(product.getQuantity());
+				return "redirect:/product/allProducts";
+			}
+		}
+		return "redirect:/error-page";
+	}
+	
 	
 	
 }

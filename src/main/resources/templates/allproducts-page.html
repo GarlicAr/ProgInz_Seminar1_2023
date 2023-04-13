@@ -78,6 +78,7 @@ main {
 	padding: 10px;
 	margin-right: 20px;
 	width: 300px;
+	position: relative;
 	
 }
 
@@ -95,6 +96,14 @@ main {
 }
 .product-list {
   white-space: nowrap;
+  overflow-x: scroll;
+}
+.CONT{
+	height:100%;
+	width: 100%;
+}
+.product-ID{
+	color: red;
 }
 </style>
 </head>
@@ -104,6 +113,7 @@ main {
 		<nav></nav>
 	</header>
 	<main>
+	<div class="CONT">
 		<div th:each="product: ${MyProducts}" class="product-container">
 			<h2 th:text="${product.getName()}" class="product-title"></h2>
 			<p th:text="${product.getDescription()}" class="product-description"></p>
@@ -111,7 +121,7 @@ main {
 			<p th:text="'Quantity:' + ${product.getQuantity()}" class="product-quantity"></p>
 			<p th:text="'ID:' + ${product.getID()}" class="product-ID"></p>
 		</div>
-
+	</div>
 	</main>
 </body>
 </html>
