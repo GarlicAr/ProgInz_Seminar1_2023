@@ -131,5 +131,17 @@ public class FirstController {
 	}
 	
 	
+	@GetMapping("/delete/{id}")
+	public String deleteFunc(@PathVariable("id") int id, org.springframework.ui.Model model) {
+		for(Product temp: allProducts) {
+			if(temp.getID()== id) {
+				allProducts.remove(temp);
+				model.addAttribute("MyProducts", allProducts);
+				return "redirect:/product/allProducts";
+			}
+		}
+		return "redirect:/error-page";
+	}
+	
 	
 }
