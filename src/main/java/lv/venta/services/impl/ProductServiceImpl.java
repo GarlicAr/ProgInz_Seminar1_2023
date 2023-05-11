@@ -24,24 +24,30 @@ public class ProductServiceImpl implements ICRUDProductService, IFilteringProduc
 	}
 
 	@Override
-	public Product retrieveOneProductByID(int id) {
+	public Product retrieveOneProductByID(int id) throws Exception {
 		// TODO Auto-generated method stub
 
 		for (Product temp : allProducts) {
 			if (temp.getID() == id) {
 				return temp;
 			}
+			else {
+				throw new Exception();
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public Product retrieveOneProductByTitle(String name) {
+	public Product retrieveOneProductByTitle(String name) throws Exception {
 		// TODO Auto-generated method stub
 
 		for (Product temp : allProducts) {
 			if (temp.getName().equals(name)) {
 				return temp;
+			}
+			else {
+				throw new Exception("Nav tads produkts!");
 			}
 		}
 		return null;

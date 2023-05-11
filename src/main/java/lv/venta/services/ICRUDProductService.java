@@ -10,10 +10,10 @@ public interface ICRUDProductService {
 	ArrayList<Product> retrieveAllProducts();
 	
 	//retrieve one by id
-	Product retrieveOneProductByID(int id);
+	Product retrieveOneProductByID(int id) throws Exception;
 	
 	//retrieve one by title
-	Product retrieveOneProductByTitle(String title);
+	Product retrieveOneProductByTitle(String title) throws Exception;
 	
 	//create (insert)
 	Product insertProductByParams(String name, String description, float price,  int quantity);
