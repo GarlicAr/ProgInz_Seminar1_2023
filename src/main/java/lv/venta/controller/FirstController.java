@@ -90,14 +90,11 @@ public class FirstController {
 	public String insertProductPost(@Valid Product product, BindingResult result) {
 		if (!result.hasErrors()) {
 
-			Product prod = new Product(
-					product.getName(), 
-					product.getDescription(), 
-					product.getPrice(),
+			Product prod = new Product(product.getName(), product.getDescription(), product.getPrice(),
 					product.getQuantity());
 			prodService.allProducts.add(prod);
 			return "redirect:/product/allProducts";
-			
+
 		} else {
 			return "insert-page";
 		}
@@ -119,20 +116,21 @@ public class FirstController {
 
 	@PostMapping("/update/{id}")
 	public String updateProductByIDpost(@PathVariable("id") int id, @Valid Product product, BindingResult result) {
-		if(!result.hasErrors()) {
-		
-		for (Product temp : prodService.allProducts) {
-			if (temp.getID() == id) {
-				temp.setName(product.getName());
-				temp.setPrice(product.getPrice());
-				temp.setDescription(product.getDescription());
-				temp.setQuantity(product.getQuantity());
-				return "redirect:/product/allProducts";
+		if (!result.hasErrors()) {
+
+			for (Product temp : prodService.allProducts) {
+				if (temp.getID() == id) {
+					temp.setName(product.getName());
+					temp.setPrice(product.getPrice());
+					temp.setDescription(product.getDescription());
+					temp.setQuantity(product.getQuantity());
+					return "redirect:/product/allProducts";
+				}
 			}
+			return "redirect:/error-page";
+		} else {
+			return "update-page";
 		}
-		return "redirect:/error-page";
-		}
-		return "error-page";
 
 	}
 

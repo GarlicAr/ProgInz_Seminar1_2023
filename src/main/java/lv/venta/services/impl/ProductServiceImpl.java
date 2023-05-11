@@ -30,11 +30,9 @@ public class ProductServiceImpl implements ICRUDProductService, IFilteringProduc
 		for (Product temp : allProducts) {
 			if (temp.getID() == id) {
 				return temp;
-			} else {
-				throw new Exception();
-			}
+			} 
 		}
-		return null;
+		throw new Exception();
 
 	}
 
