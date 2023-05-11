@@ -78,7 +78,7 @@ public class FirstController {
 
 	@GetMapping("/product/allProducts")
 	public String products(org.springframework.ui.Model model) {
-		model.addAttribute("MyProducts", prodService.allProducts);
+		model.addAttribute("MyProducts", crudService.retrieveAllProducts());
 		return "allproducts-page";
 	}
 
@@ -140,9 +140,8 @@ public class FirstController {
 	public String deleteFunc(@PathVariable("id") int id, org.springframework.ui.Model model) {
 		
 		try {
-				Product temp = crudService.retrieveOneProductByID(id);
-				prodService.allProducts.remove(temp);
-				model.addAttribute("MyProducts", prodService.allProducts);
+				crudService.deleteProductByID(id);
+				model.addAttribute("MyProducts", crudService.retrieveAllProducts());
 				return "redirect:/product/allProducts";
 		}
 		catch (Exception e) {

@@ -22,5 +22,8 @@ public interface ICRUDProductService {
 	Product updateProductByParams(int id, String name, String description, float price,  int quantity );
 	
 	//delete
-	void deleteProductByID(int id );
+	void deleteProductByID(int id ) throws Exception;
+	
+	//filter
+	
 }

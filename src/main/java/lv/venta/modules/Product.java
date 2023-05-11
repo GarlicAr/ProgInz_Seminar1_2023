@@ -1,11 +1,36 @@
 package lv.venta.modules;
 
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 public class Product {
 	private int ID;
+	
+	@NotNull
+	@Pattern(regexp = "[A-Z]{1}[a-z\\ ]+")
+	@Size(min=3, max=20)
 	private String name;
+	
+	@Min(value=0)
+	@Max(value=10000)
 	private float price;
+	
+	@NotNull
+	@Size(min=3, max=100)
 	private String description;
+	
+	
+	@NotNull
+	@Min(value = 0)
+	@Max(value = 10000)
 	private int quantity;
+	
 	private static int idCounter=0;
 	
 	
@@ -19,6 +44,7 @@ public class Product {
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
