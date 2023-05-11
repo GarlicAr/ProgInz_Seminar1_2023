@@ -118,7 +118,9 @@ public class FirstController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String updateProductByIDpost(@PathVariable("id") int id, Product product) {
+	public String updateProductByIDpost(@PathVariable("id") int id, @Valid Product product, BindingResult result) {
+		if(!result.hasErrors()) {
+		
 		for (Product temp : prodService.allProducts) {
 			if (temp.getID() == id) {
 				temp.setName(product.getName());
@@ -129,6 +131,9 @@ public class FirstController {
 			}
 		}
 		return "redirect:/error-page";
+		}
+		return "error-page";
+
 	}
 
 	@GetMapping("/delete/{id}")

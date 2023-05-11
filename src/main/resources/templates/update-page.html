@@ -66,15 +66,19 @@
     
       <label for="product_name">Product Name:</label>
       <input type="text" id="product_name" name="product_name" th:field="*{name}"><br><br>
+      <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>
       
       <label for="product_description">Product Description:</label>
       <input type="text" id="product_description" name="product_description" th:field="*{description}"></input><br><br>
+       <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></label>
       
       <label for="product_price">Product Price:</label>
       <input type="text" id="product_price" name="product_price" min="0" th:field="*{price}"><br><br>
+      <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></label>
       
       <label for="product_quantity">Product Quantity:</label>
       <input type="number" id="product_quantity" name="product_quantity" min="0" th:field="*{quantity}"><br><br>
+       <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></label>
            
       <button type="submit" value="Submit">Submit</button>
     </form>
