@@ -19,7 +19,7 @@ public interface ICRUDProductService {
 	Product insertProductByParams(String name, String description, float price,  int quantity);
 	
 	//update
-	Product updateProductByParams(int id, String name, String description, float price,  int quantity );
+	Product updateProductByParams(int id, String name, String description, float price,  int quantity ) throws Exception;
 	
 	//delete
 	void deleteProductByID(int id ) throws Exception;
