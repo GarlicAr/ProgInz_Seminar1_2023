@@ -42,6 +42,10 @@ public class Product {
 	@Max(value = 10000)
 	private int quantity;
 	
+	@ManyToOne
+	@JoinColumn(name="idCustomer") // Otras klases PK kolona
+	private Customer customer;
+	
 		
 	public int getID() {
 		return this.ID;
