@@ -2,6 +2,7 @@ package lv.venta.modules;
 
 import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,7 +10,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+
+@Table(name = "product_table") //DB puse izveidosies tabula
+@Entity
 public class Product {
+	
+	@Column(name = "Id")
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
 	
 	@NotNull
@@ -31,16 +39,11 @@ public class Product {
 	@Max(value = 10000)
 	private int quantity;
 	
-	private static int idCounter=0;
-	
-	
-	
+		
 	public int getID() {
 		return this.ID;
 	}
-	public void setID() {
-		this.ID = idCounter++;
-	}
+
 	public String getName() {
 		return name;
 	}
@@ -73,7 +76,6 @@ public class Product {
 		this.name=name;
 		this.description=description;
 		this.price=price;
-		setID();
 		this.quantity=quantity;
 		
 	}
