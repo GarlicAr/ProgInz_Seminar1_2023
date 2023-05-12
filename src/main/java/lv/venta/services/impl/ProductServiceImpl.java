@@ -9,7 +9,7 @@ import lv.venta.modules.Product;
 import lv.venta.services.ICRUDProductService;
 import lv.venta.services.IFilteringProductService;
 
-@Service
+//@Service
 public class ProductServiceImpl implements ICRUDProductService, IFilteringProductService {
 
 	public ArrayList<Product> allProducts = new ArrayList<>(

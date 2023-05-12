@@ -43,7 +43,7 @@ public class ProductServiceImplWithDB implements ICRUDProductService, IFiltering
 	public ArrayList<Product> retrieveAllProductsByTitle(String title) throws Exception {
 		
 		if(title!=null){
-			ArrayList<Product> allProductsWithTitle = productRepo.findByTitle(title);
+			ArrayList<Product> allProductsWithTitle = productRepo.findByName(title);
 			return allProductsWithTitle;
 		}
 		else

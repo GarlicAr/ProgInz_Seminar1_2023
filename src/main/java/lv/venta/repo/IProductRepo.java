@@ -13,7 +13,7 @@ public interface IProductRepo extends CrudRepository<Product, Integer>{
 	ArrayList<Product> findByPriceLessThan(float price);
 	
 	//SELECT * FROM product_table WHERE title= var(String title)
-	ArrayList<Product> findByTitle(String title);
+	ArrayList<Product> findByName(String name);
 	
 	//daudzums liealks par 10 bet cena mazak par 4
 	//SELECT * FROM product_table WHERE quantity > (int Quantity) AND price < (float price)

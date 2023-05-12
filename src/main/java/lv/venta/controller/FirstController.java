@@ -23,12 +23,10 @@ import lv.venta.modules.Product;
 @Controller
 public class FirstController {
 
-	@Autowired
-	private IFilteringProductService filterService;
+
 	@Autowired
 	private ICRUDProductService crudService;
-	@Autowired
-	private ProductServiceImpl prodService;
+	
 
 
 	@GetMapping("/product")
@@ -41,7 +39,7 @@ public class FirstController {
 	@GetMapping("/product/{title}")
 	public String productByParam2(@PathVariable("title") String title, org.springframework.ui.Model model) {
 		if (title != null) {
-			for (Product temp : prodService.allProducts) {
+			for (Product temp : crudService.retrieveAllProducts()) {
 				if (temp.getName().equals(title)) {
 					model.addAttribute("MyProduct", temp);
 					return "product-page";
@@ -60,7 +58,7 @@ public class FirstController {
 	@GetMapping("/product/allProducts/{price}")
 	public String productsUnderValue(@PathVariable("price") int price, org.springframework.ui.Model model) {
 		ArrayList<Product> tempList = new ArrayList<>();
-		for (Product temp : prodService.allProducts) {
+		for (Product temp : crudService.retrieveAllProducts()) {
 			if (temp.getPrice() < price) {
 				tempList.add(temp);
 				model.addAttribute("MyProducts", tempList);
@@ -78,9 +76,8 @@ public class FirstController {
 	public String insertProductPost(@Valid Product product, BindingResult result) {
 		if (!result.hasErrors()) {
 
-			Product prod = new Product(product.getName(), product.getDescription(), product.getPrice(),
+			crudService.insertProductByParams(product.getName(), product.getDescription(), product.getPrice(),
 					product.getQuantity());
-			prodService.allProducts.add(prod);
 			return "redirect:/product/allProducts";
 
 		} else {
@@ -106,21 +103,22 @@ public class FirstController {
 	public String updateProductByIDpost(@PathVariable("id") int id, @Valid Product product, BindingResult result) {
 		if (!result.hasErrors()) {
 
-			for (Product temp : prodService.allProducts) {
-				if (temp.getID() == id) {
-					temp.setName(product.getName());
-					temp.setPrice(product.getPrice());
-					temp.setDescription(product.getDescription());
-					temp.setQuantity(product.getQuantity());
-					return "redirect:/product/allProducts";
-				}
+			try {
+				crudService.updateProductByParams(id, product.getName(), product.getDescription(), product.getPrice(), product.getQuantity());
+				return "redirect:/product/allProducts";
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			return "redirect:/error-page";
-		} else {
-			return "update-page";
+			
+			}
+		else
+		{
+			return "error-page";
 		}
+		return "error-page";
+		} 
 
-	}
 
 	@GetMapping("/delete/{id}")
 	public String deleteFunc(@PathVariable("id") int id, org.springframework.ui.Model model) {
