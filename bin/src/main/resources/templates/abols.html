@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Product: <span th:text="${MyProduct.name}"></span></title>
+</head>
+<body>
+	<h1>Product:<span th:text="${MyProduct.name}"></span></h1>
+	<ul>
+		<li>Nosaukums: <span th:text="${MyProduct.name}"></span></li>
+		<li>Apraksts: <span th:text="${MyProduct.description}"></span></li>
+		<li>Cena: <span th:text="${MyProduct.price}"></span> EUR</li>
+		<li>Skaits noliktavā: <span th:text="${MyProduct.stock}"></span></li>
+		<li>Minimālais pasūtījuma skaits: <span th:text="${MyProduct.minOrderQuantity}"></span></li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Update Product</title>
+  </head>
+  <body>
+  	<style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f1f1f1;
+      }
+      
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-top: 50px;
+      }
+      
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+      }
+      
+      input[type="text"], input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+      
+      textarea {
+        height: 150px;
+      }
+      
+      button[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      button[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      
+  	</style>
+    <h1>Update Product</h1>
+    <form action="#" th:action="@{/update/__${id}__}" th:object="${product}" method="post">
+    
+      <label for="product_name">Product Name:</label>
+      <input type="text" id="product_name" name="product_name" th:field="*{name}"><br><br>
+      <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>
+      
+      <label for="product_description">Product Description:</label>
+      <input type="text" id="product_description" name="product_description" th:field="*{description}"></input><br><br>
+       <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></label>
+      
+      <label for="product_price">Product Price:</label>
+      <input type="text" id="product_price" name="product_price" min="0" th:field="*{price}"><br><br>
+      <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></label>
+      
+      <label for="product_quantity">Product Quantity:</label>
+      <input type="number" id="product_quantity" name="product_quantity" min="0" th:field="*{quantity}"><br><br>
+       <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></label>
+           
+      <button type="submit" value="Submit">Submit</button>
+    </form>
+  </body>
+</html>
