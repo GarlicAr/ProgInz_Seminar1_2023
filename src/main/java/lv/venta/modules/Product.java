@@ -20,20 +20,23 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
 	
+	@Column(name = "Title")
 	@NotNull
 	@Pattern(regexp = "[A-Z]{1}[a-z\\ ]+")
 	@Size(min=3, max=20)
 	private String name;
 	
+	@Column(name = "Price")
 	@Min(value=0)
 	@Max(value=10000)
 	private float price;
 	
+	@Column(name = "Description")
 	@NotNull
 	@Size(min=3, max=100)
 	private String description;
 	
-	
+	@Column(name = "Quantity")
 	@NotNull
 	@Min(value = 0)
 	@Max(value = 10000)
