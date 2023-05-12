@@ -13,7 +13,7 @@ public interface ICRUDProductService {
 	Product retrieveOneProductByID(int id) throws Exception;
 	
 	//retrieve one by title
-	Product retrieveOneProductByTitle(String title) throws Exception;
+	ArrayList<Product> retrieveAllProductsByTitle(String title) throws Exception;
 	
 	//create (insert)
 	Product insertProductByParams(String name, String description, float price,  int quantity);

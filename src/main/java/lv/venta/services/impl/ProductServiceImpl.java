@@ -37,12 +37,14 @@ public class ProductServiceImpl implements ICRUDProductService, IFilteringProduc
 	}
 
 	@Override
-	public Product retrieveOneProductByTitle(String name) throws Exception {
+	public ArrayList<Product> retrieveAllProductsByTitle(String name) throws Exception {
 		// TODO Auto-generated method stub
+		ArrayList<Product> allProductsWithTitle = new ArrayList<>();
 
 		for (Product temp : allProducts) {
 			if (temp.getName().equals(name)) {
-				return temp;
+				allProductsWithTitle.add(temp);
+				return allProductsWithTitle;
 			} else {
 				throw new Exception("Nav tads produkts!");
 			}

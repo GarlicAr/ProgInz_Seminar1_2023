@@ -30,18 +30,6 @@ public class FirstController {
 	@Autowired
 	private ProductServiceImpl prodService;
 
-	@GetMapping("/hello") // Url izsaukums: localhost:8080/hello
-	public String Hello() {
-		System.out.println("Baigi labi!");
-		return "hello-page"; // Tiks paradita hello-page.html lapa !
-	}
-
-	@GetMapping("/msg")
-	public String message(org.springframework.ui.Model model) {
-		model.addAttribute("myMsg", "Sveiks jaunieti!, Te Arvidonkuls");
-		model.addAttribute("myDate", "Sodienas datums: 23.03.2023");
-		return "message-page";
-	}
 
 	@GetMapping("/product")
 	public String product(org.springframework.ui.Model model) {
